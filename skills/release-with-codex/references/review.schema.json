@@ -1,0 +1,79 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "decision",
+    "reviewedHead",
+    "reviewedUpstream",
+    "reviewedPaths",
+    "pendingCommits",
+    "proposedMessage",
+    "releaseImpact",
+    "reasons",
+    "blockers"
+  ],
+  "properties": {
+    "decision": {
+      "type": "string",
+      "enum": ["ready", "blocked"]
+    },
+    "reviewedHead": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}([0-9a-f]{24})?$",
+      "description": "仅完整 Git SHA，不包含分支名、@ 或其他文字。"
+    },
+    "reviewedUpstream": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}([0-9a-f]{24})?$",
+      "description": "仅完整 Git SHA，不包含分支名、@ 或其他文字。"
+    },
+    "reviewedPaths": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "pendingCommits": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["sha", "messageMatchesDiff", "suggestedMessage", "reason"],
+        "properties": {
+          "sha": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{40}([0-9a-f]{24})?$"
+          },
+          "messageMatchesDiff": {
+            "type": "boolean"
+          },
+          "suggestedMessage": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "proposedMessage": {
+      "type": "string"
+    },
+    "releaseImpact": {
+      "type": "string",
+      "enum": ["none", "patch", "minor", "major"]
+    },
+    "reasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

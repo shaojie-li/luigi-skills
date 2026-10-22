@@ -16,4 +16,16 @@ pnpm check
 
 check 包含 profile-web-interaction 的 Python 回归测试。
 
+## 发布前审查
+
+[`release-with-codex`](skills/release-with-codex/SKILL.md) 使用 Codex CLI 的 `gpt-6-luna` 只读检查真实 diff 和未推送提交，提出 Conventional Commit 消息；执行仓库检查后，由调用 Skill 的 Agent 在用户授权范围内提交、普通 push 并核验已有 CI 的发布结果。它不重复计算版本、打 tag 或 npm publish，也不改写已有提交。
+
+需要 Node.js 24+、Git、已登录且可使用该模型的 Codex CLI，以及用于 GitHub 状态检查的 gh。非 main、上游分叉、没有待提交/推送内容时停止；干净但有未推送提交时继续审查。分发索引推送后，可通过 `lt add skill release-with-codex --agent codex --cwd /path/to/project` 安装；尚未推送时添加 `--source /path/to/luigi-skills/registry/index.json` 使用本地索引。
+
+安装后调用：`使用 $release-with-codex 检查并发布当前项目`。只需建议时说“使用 $release-with-codex 预览提交和发布影响，不提交或推送”。维护此 Skill 的仓库只分发资产，没有 npm 自动发布流水线；不要在本仓库调用它来强行发 npm 包。
+
+状态检查脚本的回归测试已纳入 `pnpm check`，覆盖分支、上游、部分暂存、未跟踪文件变化、发布标签同步和失败停止。Luna 的判断仍需要结合具体证据核对，不能把格式检查或模型建议当作提交语义必然正确的证明。
+
+2026-10-22 使用 Codex CLI 0.160.0、gpt-6-luna 实测：当前 CLI 文档改动建议 docs 类型且版本影响为 none；隔离仓库中将新增 multiply 公开函数写成 docs 提交时，审查指出应为 feat 并返回 blocked。测试没有对真实仓库提交、推送或发布。
+
 MIT License。

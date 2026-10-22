@@ -39,6 +39,14 @@
       "version": "0.1.0",
       "directory": "skills/profile-web-interaction",
       "requires": []
+    },
+    {
+      "type": "skill",
+      "name": "release-with-codex",
+      "description": "发布前通过 Codex CLI 的 GPT-6 Luna 审查 diff 与 Conventional Commits 语义，检查 main 分支和待推送状态，执行仓库验证并沿用现有 CI 发布。用于用户要求审查发布、提交并发布时；普通代码修改不自动提交或发布。",
+      "version": "0.1.0",
+      "directory": "skills/release-with-codex",
+      "requires": []
     }
   ]
 }

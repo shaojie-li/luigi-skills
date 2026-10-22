@@ -1,0 +1,4 @@
+interface:
+  display_name: "审查提交并发布"
+  short_description: "使用 Codex CLI 与 GPT-6 Luna 审查提交语义并沿用现有 CI 发布"
+  default_prompt: "使用 $release-with-codex 检查当前仓库的改动和未推送提交，按提交规范提交并通过现有 CI 发布。"
