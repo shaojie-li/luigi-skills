@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "skills": [
+    {
+      "name": "github-projects",
+      "description": "使用 GitHub Projects 与 Issues 规划、拆分和跟踪软件项目，建立或沿用 Issue、PR 和看板标准。用于用户要求项目管理、任务拆分或进度同步时；不因普通代码修改自动创建远程事项。",
+      "files": [
+        {
+          "path": "references/project-management.md",
+          "content": "# GitHub 项目管理标准\n\n这是新项目的默认流程；已经明确的仓库约定优先。Projects 管理视图和工作状态，Issue 承载需求与验收，PR 承载实现。Projects 支持 Issue、PR 和草稿事项，草稿进入实际开发前建议转为仓库 Issue。\n\n## 最小工作流程\n\n1. 收集想法，先搜索已有事项；不确定的想法可以留在 Backlog。\n2. 可执行工作建立 Issue，包含问题、目标、范围、验收标准、验证方法和依赖。\n3. 加入用户指定的 Project，按实际字段配置状态和优先级。\n4. 开始实施时进入 In progress；创建关联 PR 后进入 In review。\n5. 验收通过且达到仓库约定的交付条件后进入 Done。未合并的 PR 不自动视为交付。\n\n## 默认字段与视图\n\n- Status：Backlog、Ready、In progress、In review、Done。仅在没有既有标准时采用。\n- Priority：P0（阻断/紧急）、P1（当前核心）、P2（正常）、P3（候选）。避免所有任务都是最高优先级。\n- Assignee、Labels、Milestone 使用 GitHub 原生字段；日期、迭代和复杂度按需要添加。\n- 初期用一个按 Status 分组的看板和一个待办表格即可。阻塞原因写在 Issue，必要时复用 blocked 标签，不为它额外造一套状态机。\n\nIssue 的表单字段是正文内容，不会自动变成 Project 字段。项目字段、视图及自动化需要在目标 Project 单独配置。模板不会创建标签、Project、Issue 或远程自动化。\n\n## 拆分与完成标准\n\n- 一个 Issue 对应一个可验收结果。实现中的小步骤使用 checklist。\n- 需要独立负责人、状态或讨论的子工作使用 sub-issue，并记录依赖；不要把 checklist 当成独立 Issue 的完整替代品。\n- PR 描述关联 Issue，说明行为变化和实际验证。仅在合并确实完成整个 Issue 时使用关闭关键词。\n- 交付包含必要文档和失败路径；没有执行的验证明确列出，不伪造成功。\n\n## 使用 GitHub CLI\n\n先用 gh auth status 核对当前身份，使用 gh repo view、gh project list、gh project field-list 和 gh project item-list 读取目标。具体参数以当前版本的 --help 为准。写入 Projects 需要适用的项目权限；缺权限时说明最小需要的权限，不输出 token。\n\n创建 Issue 或 PR 的多行正文使用临时文件和 --body-file。授权创建后保存真实 URL，再把 Issue 添加到对应 Project。更新字段前查实际 ID 与选项，不硬编码其他项目的 ID。操作部分成功时先回读状态，再决定是否重试。\n",
+          "sha256": "f4d0ed32768a8f5637c1a0647792723bc19fd3d43179e4d5896b158906b8f239"
+        },
+        {
+          "path": "SKILL.md",
+          "content": "---\nname: github-projects\ndescription: 使用 GitHub Projects 与 Issues 规划、拆分和跟踪软件项目，建立或沿用 Issue、PR 和看板标准。用于用户要求项目管理、任务拆分或进度同步时；不因普通代码修改自动创建远程事项。\n---\n\n# GitHub 项目管理\n\n先读取仓库已有的 Issue/PR 模板、项目规则和关联 Projects，沿用已有语义。默认规范见 [项目管理标准](references/project-management.md)，不要用默认规范覆盖用户已确认的流程。\n\nProjects 是组织层：条目可以引用 Issue、PR，也可以是 draft issue。Issue 是可执行工作及验收的事实来源；PR 是实现变更。小步骤用 checklist，需独立负责人、状态或讨论的子工作用 sub-issue；不为每个代码动作创建 Issue。\n\n开始前明确仓库 owner/name 和 Project 所属用户或组织及编号，不能从同名仓库猜 Project。优先通过已连接的 GitHub 工具或 gh 读取；命令语法以当前 gh help 为准。只有实际需要写入时才检查对应权限，不请求无关 token scope。\n\n准备任务时记录问题与用户价值、范围和非目标、验收标准、关键失败路径、验证方式及依赖。标题表达结果，避免“优化一下”。先搜索同类 Issue 和 Project item，防止重复。Issue 表单正文不自动映射为 Project 自定义字段，状态和优先级需要另行设置或使用已配置自动化。\n\nIssue/PR 模板由 luigi-starters 仓库维护，通过 `lt add preset github-projects --cwd .` 安装；保留已有自定义模板，不直接覆盖同名目标。模板里不假定仓库已存在特定标签。\n\n远程操作依照用户本次授权：只要求规划时输出可审查的任务；明确要求创建或同步时，在已确认范围内执行，不重复索要相同授权。创建后记录真实 URL，更新 Project 字段时使用实际查询到的 ID/选项；失败保留已完成的链接，不盲目重试重复创建。不要自动关闭 Issue、合并 PR 或修改账号权限。\n\n完成状态必须有证据：实现完成、验收与必要检查通过后才能标记 Done。PR 已打开但尚未合并通常处于 In review；若已有流程不同，按项目约定。阻塞时标记原因、依赖和解除条件，不用 Done 掩盖阻塞。\n\n官方依据：[Projects](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects)、[Issue 表单](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-issue-forms)、[gh project](https://cli.github.com/manual/gh_project)。远程创建不属于安装此 Skill 的隐含授权。\n",
+          "sha256": "a71e064f2da28eefc117a7e396063c7f63be1173ba620c76b7ca0d4d24535cb5"
+        }
+      ]
+    }
+  ],
+  "assets": []
+}

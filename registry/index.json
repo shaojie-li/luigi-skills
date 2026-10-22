@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 2,
+  "entries": [
+    {
+      "type": "skill",
+      "name": "web-ui",
+      "description": "在 React 和 Tailwind 项目中实现或调整页面与组件时，优先发现已有 UI 资产，并保持主题、组合方式和交互状态一致。适用于 Web UI 实现，不用于移动原生界面。",
+      "version": "0.1.0",
+      "requires": [],
+      "url": "items/6d8bbb2e744dc64ddf4c102bde32d4eeab44521aea5907cec9efba7499770ccb.json",
+      "sha256": "6d8bbb2e744dc64ddf4c102bde32d4eeab44521aea5907cec9efba7499770ccb"
+    },
+    {
+      "type": "skill",
+      "name": "forms",
+      "description": "使用 React Hook Form 实现或修改 React 表单，处理受控组件接入、校验、提交错误和异步初始数据。仅在项目采用或明确选择 React Hook Form 时使用。",
+      "version": "0.1.0",
+      "requires": [],
+      "url": "items/69b9763fe3de106808b68db43aa0957dbc6ecfef14a46cb987da55b133f002cc.json",
+      "sha256": "69b9763fe3de106808b68db43aa0957dbc6ecfef14a46cb987da55b133f002cc"
+    },
+    {
+      "type": "skill",
+      "name": "tables",
+      "description": "在采用 TanStack Table 的 React 项目中实现或修改数据列表，明确客户端与服务端分页、排序、筛选和行选择的状态归属。适用于交互数据表格，不用于静态排版表格。",
+      "version": "0.1.0",
+      "requires": [],
+      "url": "items/4c8366f8f689317ff248fc58d0859082f43730e13ef075b237cf6f3a88287a46.json",
+      "sha256": "4c8366f8f689317ff248fc58d0859082f43730e13ef075b237cf6f3a88287a46"
+    },
+    {
+      "type": "skill",
+      "name": "github-projects",
+      "description": "使用 GitHub Projects 与 Issues 规划、拆分和跟踪软件项目，建立或沿用 Issue、PR 和看板标准。用于用户要求项目管理、任务拆分或进度同步时；不因普通代码修改自动创建远程事项。",
+      "version": "0.1.0",
+      "requires": [],
+      "url": "items/14e259264290a47020ac5e128c4936b9af9c424822dc96d766c87d98d07315bd.json",
+      "sha256": "14e259264290a47020ac5e128c4936b9af9c424822dc96d766c87d98d07315bd"
+    },
+    {
+      "type": "skill",
+      "name": "profile-web-interaction",
+      "description": "录制 Web 交互的 Chromium 性能数据，用 Python 提炼 CPU 热点、React 轨道和可用的源码位置，辅助判断是否值得优化。适用于交互卡顿、状态更新影响范围和优化前后比较；普通 UI 实现或仅检查功能正确性时不触发。",
+      "version": "0.1.0",
+      "requires": [],
+      "url": "items/89b827e433b51dfb7d78f50effd60562aed6757bb7f4a30e0fb3bbdd14f8eeec.json",
+      "sha256": "89b827e433b51dfb7d78f50effd60562aed6757bb7f4a30e0fb3bbdd14f8eeec"
+    }
+  ]
+}

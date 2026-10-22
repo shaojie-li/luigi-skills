@@ -1,0 +1,23 @@
+{
+  "name": "luigi-skills",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "packageManager": "pnpm@10.34.6",
+  "scripts": {
+    "build": "tsx scripts/build-registry.ts",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "pnpm format:check && pnpm typecheck && tsx scripts/build-registry.ts --check && pnpm test",
+    "test": "tsx --test scripts/*.test.ts && python3 -B -m unittest discover -s tests/profile-web-interaction"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "prettier": "^3.6.0",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3",
+    "yaml": "^2.8.0",
+    "zod": "4.6.5"
+  }
+}
