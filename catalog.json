@@ -4,7 +4,7 @@
       "type": "skill",
       "name": "web-ui",
       "description": "在 React 和 Tailwind 项目中实现或调整页面与组件时，优先发现已有 UI 资产，并保持主题、组合方式和交互状态一致。适用于 Web UI 实现，不用于移动原生界面。",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "directory": "skills/web-ui",
       "requires": []
     },

@@ -16,6 +16,28 @@ pnpm check
 
 check 包含 profile-web-interaction 的 Python 回归测试。
 
+## UI 资产与 Skill 的关系
+
+UI 组件在 luigi-ui 维护，本仓库不保存可安装组件清单。使用组件前通过配置来源的 `lt list` 或 registry 索引确认可用资产，不能从历史示例推断它仍可安装。
+
+`web-ui` 指导组件发现、主题、组合和交互实现；`forms` 与 `tables` 分别指导采用 React Hook Form、TanStack Table 的项目。它们不依赖某个同名 UI 资产，撤回 UI 组件不意味着删除对应领域的 Skill，也不授权删除消费项目已有源码。
+
+## 代码规范与检查工具
+
+规范、Agent 指导和自动检查分工如下：
+
+| 入口                                                                                                                                | 职责                                                                                          |
+| ----------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| 目标项目的 `AGENTS.md`、`docs/coding-standards.md`                                                                                  | 项目实际采用的编码约束，执行任务时先读取                                                      |
+| [`web-ui`](skills/web-ui/SKILL.md)                                                                                                  | React 命名、组件拆分、状态归属、主题和交互约束                                                |
+| [`forms`](skills/forms/SKILL.md)、[`tables`](skills/tables/SKILL.md)                                                                | 对应技术栈的状态管理、错误处理和验证规则                                                      |
+| [code-quality 预设的编码规范](https://github.com/shaojie-li/luigi-starters/blob/main/presets/code-quality/docs/coding-standards.md) | 完整规范来源，覆盖 TypeScript、模块边界、React、可访问性、性能和提交约定                      |
+| [code-quality 预设](https://github.com/shaojie-li/luigi-starters/tree/main/presets/code-quality)                                    | 分发 ESLint、Prettier 和提交检查配置；`tooling/react-naming.ts` 只是其中的 React 命名检查规则 |
+
+安装 Skill 不等于安装 ESLint 或启用质量检查。既有项目可按需通过 `lt add preset code-quality --cwd /path/to/project` 接入预设，遵循其安装说明和已有文件冲突保护；本仓库不复制维护另一份完整规范或检查配置。
+
+luigi-skills 自身使用 TypeScript strict、ESM 和 pnpm；当前 `pnpm check` 包含 Prettier、根目录 scripts 的 TypeScript 检查、分发一致性、TypeScript 测试和 Python 回归测试，尚未接入 ESLint。Skill 中的设计与行为约束由 Agent 执行和评审核对，不能用静态检查通过代替实际行为验证。
+
 ## 发布前审查
 
 [`release-with-codex`](skills/release-with-codex/SKILL.md) 使用 Codex CLI 的 `gpt-6-luna` 只读检查真实 diff 和未推送提交，提出 Conventional Commit 消息；执行仓库检查后，由调用 Skill 的 Agent 在用户授权范围内提交、普通 push 并核验已有 CI 的发布结果。它不重复计算版本、打 tag 或 npm publish，也不改写已有提交。

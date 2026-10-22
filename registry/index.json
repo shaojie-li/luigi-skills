@@ -63,6 +63,15 @@
       "requires": [],
       "url": "items/fef36acbd031259ed020efaeabab246f39508bdf4d4ab3a434e016e235463cc9.json",
       "sha256": "fef36acbd031259ed020efaeabab246f39508bdf4d4ab3a434e016e235463cc9"
+    },
+    {
+      "type": "skill",
+      "name": "web-ui",
+      "description": "在 React 和 Tailwind 项目中实现或调整页面与组件时，优先发现已有 UI 资产，并保持主题、组合方式和交互状态一致。适用于 Web UI 实现，不用于移动原生界面。",
+      "version": "0.1.1",
+      "requires": [],
+      "url": "items/5db13f18fe61fb5dac66d995a4ce12e5cd83be22936bd73d7d031cae40fbad98.json",
+      "sha256": "5db13f18fe61fb5dac66d995a4ce12e5cd83be22936bd73d7d031cae40fbad98"
     }
   ]
 }
